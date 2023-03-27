@@ -1,0 +1,15 @@
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\bin\Debug\net7.0\Laba2.exe
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\bin\Debug\net7.0\Laba2.deps.json
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\bin\Debug\net7.0\Laba2.runtimeconfig.json
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\bin\Debug\net7.0\Laba2.dll
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\bin\Debug\net7.0\Laba2.pdb
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\Laba2.csproj.AssemblyReference.cache
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\Laba2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\Laba2.AssemblyInfoInputs.cache
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\Laba2.AssemblyInfo.cs
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\Laba2.csproj.CoreCompileInputs.cache
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\Laba2.dll
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\refint\Laba2.dll
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\Laba2.pdb
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\Laba2.genruntimeconfig.cache
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba2\obj\Debug\net7.0\ref\Laba2.dll
