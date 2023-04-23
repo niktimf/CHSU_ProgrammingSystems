@@ -1,4 +1,4 @@
-﻿namespace Laba2.Console;
+﻿namespace Laba2;
 
 interface INameAndCopy
 {

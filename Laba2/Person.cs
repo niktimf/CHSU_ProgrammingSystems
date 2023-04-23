@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Laba2.Console;
+namespace Laba2;
 
 public class Person : INameAndCopy
 {
     private string _name;
-    private int _age;
+    private DateTime _birthDate;
 
     public string Name
     {
@@ -17,22 +17,22 @@ public class Person : INameAndCopy
         set => _name = value;
     }
 
-    public int Age
+    public DateTime BirthDate
     {
-        get => _age;
-        set => _age = value;
+        get => _birthDate;
+        set => _birthDate = value;
     }
 
     public Person()
     {
         Name = "Unknown";
-        Age = 0;
+        BirthDate = DateTime.MinValue;
     }
 
-    public Person(string name, int age)
+    public Person(string name, DateTime birthDate)
     {
         Name = name;
-        Age = age;
+        BirthDate = birthDate;
     }
 
     public override bool Equals(object obj)
@@ -43,16 +43,25 @@ public class Person : INameAndCopy
         }
 
         Person other = (Person)obj;
-        return Name == other.Name && Age == other.Age;
+        return Name == other.Name && BirthDate == other.BirthDate;
     }
 
     public override int GetHashCode()
     {
-        return Name.GetHashCode() ^ Age.GetHashCode();
+        return Name.GetHashCode() ^ BirthDate.GetHashCode();
     }
 
     public virtual object DeepCopy()
     {
-        return new Person(Name, Age);
+        return new Person(Name, BirthDate);
     }
+
+
+
+
+
+
+
+
+
 }

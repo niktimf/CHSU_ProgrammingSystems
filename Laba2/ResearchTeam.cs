@@ -1,132 +1,230 @@
 ﻿using System.Collections;
 using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
-namespace Laba2.Console;
+
+
+namespace Laba2;
 
 /// <summary>Класс, содержащий информацию о команде исследований.</summary>
-public class ResearchTeam : Team, INameAndCopy
+
+public class ResearchTeam : Team, INameAndCopy, IEnumerable
 {
     private string _researchTopic;
-    private TimeFrame _duration;
-    private ArrayList _members;
+    private TimeFrame _researchDuration;
+    private ArrayList _participants;
     private ArrayList _publications;
 
-    // Конструкторы
-
-    public ResearchTeam(string organization, string project, int registrationNumber, TimeFrame duration)
-        : base(organization, project, registrationNumber)
+    public ResearchTeam() : base()
     {
-        _researchTopic = "Unknown";
-        _duration = duration;
-        _members = new ArrayList();
+        _researchTopic = "Исследование";
+        _researchDuration = TimeFrame.Year;
+        _participants = new ArrayList();
         _publications = new ArrayList();
     }
 
-    public ResearchTeam() : this("Unknown Organization", "Unknown Project", 0, new TimeFrame())
+    public ResearchTeam(string organization, int registrationNumber, string researchTopic, TimeFrame researchDuration)
+    : base(organization, registrationNumber)
     {
+        _researchTopic = researchTopic;
+        _researchDuration = researchDuration;
+        _participants = new ArrayList();
+        _publications = new ArrayList();
     }
 
-    // Свойства
+    public string ResearchTopic
+    {
+        get => _researchTopic;
+        set => _researchTopic = value;
+    }
+
+    public TimeFrame ResearchDuration
+    {
+        get => _researchDuration;
+        set => _researchDuration = value;
+    }
 
     public ArrayList Publications
     {
         get => _publications;
+        set => _publications = value;
     }
 
     public Paper LatestPublication
     {
         get
         {
-            Paper latest = null;
-            foreach (Paper publication in _publications)
+            if (_publications.Count == 0)
             {
-                if (latest == null || publication.PublicationDate > latest.PublicationDate)
+                return null;
+            }
+            Paper latest = (Paper)_publications[0];
+            foreach (Paper p in _publications)
+            {
+                if (p.PublicationTime > latest.PublicationTime)
                 {
-                    latest = publication;
+                    latest = p;
                 }
             }
             return latest;
         }
     }
 
-    public ArrayList Members
-    {
-        get => _members;
-    }
-
-    public override Team TeamData
-    {
-        get => base.TeamData;
-        set => base.TeamData = value;
-    }
-
-    // Методы
-
     public void AddPapers(params Paper[] papers)
     {
-        foreach (Paper paper in papers)
-        {
-            _publications.Add(paper);
-        }
-    }
-
-    public void AddMembers(params Person[] members)
-    {
-        foreach (Person member in members)
-        {
-            _members.Add(member);
-        }
+        _publications.AddRange(papers);
     }
 
     public override string ToString()
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine(base.ToString());
-        stringBuilder.AppendLine($"Research topic: {_researchTopic}");
-        stringBuilder.AppendLine($"Duration: {_duration}");
-        stringBuilder.AppendLine("Members:");
-        foreach (Person member in _members)
-        {
-            stringBuilder.AppendLine(member.ToString());
-        }
-        stringBuilder.AppendLine("Publications:");
-        foreach (Paper publication in _publications)
-        {
-            stringBuilder.AppendLine(publication.ToString());
-        }
-        return stringBuilder.ToString();
+        return base.ToString() +
+        $"\nResearch Topic: {_researchTopic}" +
+        $"\nResearch Duration: {_researchDuration}" +
+        $"\nParticipants: {string.Join(", ", _participants)}" +
+        $"\nPublications: {string.Join(", ", _publications)}";
     }
 
     public string ToShortString()
     {
-        return base.ToString() + $", Research topic: {_researchTopic}, Duration: {_duration}";
+        return base.ToString() +
+        $"\nResearch Topic: {_researchTopic}" +
+        $"\nResearch Duration: {_researchDuration}";
     }
 
-    public object DeepCopy()
+    public override object DeepCopy()
     {
         ResearchTeam copy = (ResearchTeam)MemberwiseClone();
-        copy._members = new ArrayList();
-        foreach (Person member in _members)
-        {
-            copy._members.Add(member.DeepCopy());
-        }
-        copy._publications = (ArrayList)_publications.Clone();
+        copy._participants = new ArrayList(_participants);
+        copy._publications = new ArrayList(_publications);
         return copy;
     }
 
-    // Реализация интерфейса INameAndCopy
-
-    public string Name
+    public ArrayList Participants
     {
-        get => _researchTopic;
-        set => _researchTopic = value;
+        get => _participants;
+        set => _participants = value;
     }
 
-    public object GetCopy()
+    public void AddMembers(params Person[] persons)
     {
-        return DeepCopy();
+        _participants.AddRange(persons);
     }
+
+    public Team ResearchTeamInfo
+    {
+        get => new Team(Organization, RegistrationNumber);
+        set
+        {
+            Organization = value.Organization;
+            RegistrationNumber = value.RegistrationNumber;
+        }
+    }
+
+    public IEnumerable<Person> MembersWithoutPublications
+    {
+        get
+        {
+            foreach (Person participant in _participants)
+            {
+                bool hasPublication = false;
+                foreach (Paper publication in _publications)
+                {
+                    if (publication.PublicationAuthor.Equals(participant))
+                    {
+                        hasPublication = true;
+                        break;
+                    }
+                }
+                if (!hasPublication)
+                {
+                    yield return participant;
+                }
+            }
+        }
+    }
+
+    public IEnumerable<Paper> GetPublicationsFromLastYears(int years)
+    {
+        DateTime currentDate = DateTime.Now;
+        foreach (Paper paper in _publications)
+        {
+            if (currentDate - paper.PublicationTime <= TimeSpan.FromDays(365 * years))
+            {
+                yield return paper;
+            }
+        }
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return new ResearchTeamEnumerator(this);
+    }
+
+    private class ResearchTeamEnumerator : IEnumerator
+    {
+        private ResearchTeam _researchTeam;
+        private int _currentIndex;
+
+        public ResearchTeamEnumerator(ResearchTeam researchTeam)
+        {
+            _researchTeam = researchTeam;
+            _currentIndex = -1;
+        }
+
+        public bool MoveNext()
+        {
+            while (++_currentIndex < _researchTeam._participants.Count)
+            {
+                Person person = (Person)_researchTeam._participants[_currentIndex];
+                if (_researchTeam._publications.Cast<Paper>().Any(p => p.PublicationAuthor.Equals(person)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+
+        public object Current => _researchTeam._participants[_currentIndex];
+    }
+
+
+    public IEnumerable<Person> MembersWithMoreThanOnePublication()
+    {
+        foreach (Person person in _participants)
+        {
+            int publicationsCount = _publications.Cast<Paper>().Count(p => p.PublicationAuthor.Equals(person));
+            if (publicationsCount > 1)
+            {
+                yield return person;
+            }
+        }
+    }
+    public IEnumerable<Paper> PublicationsLastYear()
+    {
+        DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+        foreach (Paper publication in _publications)
+        {
+            if (publication.PublicationTime > oneYearAgo)
+            {
+                yield return publication;
+            }
+        }
+    }
+
+
+
+
 }
+
+
 
 
 

@@ -1,7 +1,7 @@
-﻿namespace Laba2.Console;
+﻿namespace Laba2;
 
 /// <summary>Класс, содержащий информацию о газете.</summary>
-public class Paper : INameAndCopy
+public class Paper //: INameAndCopy
 {
     private string _publicationTitle = "Title";
     private Person _publicationAuthor = new();
