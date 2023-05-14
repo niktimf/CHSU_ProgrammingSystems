@@ -1,0 +1,15 @@
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\bin\Debug\net7.0\Laba3.exe
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\bin\Debug\net7.0\Laba3.deps.json
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\bin\Debug\net7.0\Laba3.runtimeconfig.json
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\bin\Debug\net7.0\Laba3.dll
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\bin\Debug\net7.0\Laba3.pdb
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\Laba3.csproj.AssemblyReference.cache
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\Laba3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\Laba3.AssemblyInfoInputs.cache
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\Laba3.AssemblyInfo.cs
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\Laba3.csproj.CoreCompileInputs.cache
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\Laba3.dll
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\refint\Laba3.dll
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\Laba3.pdb
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\Laba3.genruntimeconfig.cache
+C:\Users\morph\Desktop\TimofeenkoWork-main\Laba3\obj\Debug\net7.0\ref\Laba3.dll
